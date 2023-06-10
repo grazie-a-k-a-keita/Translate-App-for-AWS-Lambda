@@ -61,7 +61,8 @@ function putItem(inputText, outputText) {
             }
         }, 
         ReturnConsumedCapacity: "TOTAL", 
-        TableName: "handson-table"
+        // テーブル名
+        TableName: "xxxxx"
     };
 
     dynamodb.putItem(params, function(err, data) {
