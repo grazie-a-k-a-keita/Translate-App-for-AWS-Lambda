@@ -16,5 +16,8 @@ AWS/Lambdaを使用した『翻訳 Web API』
 ## AWS SDK for JavaScript
 https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/
 
+## Language Codes
+https://docs.aws.amazon.com/ja_jp/translate/latest/dg/what-is-languages.html
+
 ## Reference
 https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-Serverless-1-2022-reg-event.html?trk=aws_introduction_page
