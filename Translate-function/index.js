@@ -88,8 +88,7 @@ function getDate() {
 }
 
 // ゼロ埋め処理
-function zeroPadding(date, hour) {
-  if (hour) date;
+function zeroPadding(date) {
   if (date < 10) date = "0" + date;
   return date;
 }
