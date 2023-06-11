@@ -63,7 +63,7 @@ async function putItem(inputText, outputText) {
     },
     ReturnConsumedCapacity: "TOTAL",
     // テーブル名
-    TableName: "handson-table",
+    TableName: "xxxxx",
   };
 
   await dynamodb.putItem(params, function (err, data) {
