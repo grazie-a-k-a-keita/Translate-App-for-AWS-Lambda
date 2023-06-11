@@ -6,8 +6,6 @@ exports.handler = async (event) => {
   const inputText = event.queryStringParameters.input_text;
   const outputText = await translateText(inputText);
 
-  await putItem(inputText, outputText);
-
   const response = {
     statusCode: 200,
     headers: {
@@ -21,6 +19,9 @@ exports.handler = async (event) => {
     }),
     isBase64Encoded: false,
   };
+
+  await putItem(inputText, outputText);
+
   return response;
 };
 
@@ -46,12 +47,12 @@ function translateText(inputText) {
 }
 
 // DynamoDBに更新する関数
-function putItem(inputText, outputText) {
-  var timestamp = new Date().getTime();
+async function putItem(inputText, outputText) {
+  var timestamp = getDate();
   var params = {
     Item: {
       timestamp: {
-        S: String(timestamp),
+        S: timestamp,
       },
       input_text: {
         S: inputText,
@@ -62,11 +63,33 @@ function putItem(inputText, outputText) {
     },
     ReturnConsumedCapacity: "TOTAL",
     // テーブル名
-    TableName: "xxxxx",
+    TableName: "handson-table",
   };
 
-  dynamodb.putItem(params, function (err, data) {
+  await dynamodb.putItem(params, function (err, data) {
     if (err) console.log(err);
     else console.log(data);
   });
+}
+
+// timestamp取得
+function getDate() {
+  var now = new Date();
+  var timestamp;
+  for (let i = 0; i < 6; i++) {}
+  timestamp = now.getFullYear().toString();
+  timestamp = timestamp + zeroPadding(now.getMonth() + 1);
+  timestamp = timestamp + zeroPadding(now.getDate());
+  timestamp = timestamp + zeroPadding(now.getHours());
+  timestamp = timestamp + zeroPadding(now.getMinutes());
+  timestamp = timestamp + zeroPadding(now.getSeconds());
+  console.log("timestamp : " + timestamp);
+  return timestamp;
+}
+
+// ゼロ埋め処理
+function zeroPadding(date, hour) {
+  if (hour) date;
+  if (date < 10) date = "0" + date;
+  return date;
 }
